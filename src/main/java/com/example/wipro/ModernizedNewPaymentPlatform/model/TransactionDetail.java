@@ -17,32 +17,30 @@ public class TransactionDetail {
     private int transcationId;
 
     private String customerId;
-    private String password;
+    private String accountId;
     private String creditAmount;
     private String debitAmount;
     private String email;
     private String Address;
     private String phone;
-    private String payemntMode;
+
     private LocalDate timestamp;
     private String paymentStatus;
 
     public TransactionDetail() {
     }
 
-
-    public TransactionDetail(String customerId, String password, String creditAmount,
-                              String debitAmount, String email, String address, String phone, String payemntMode,
-                              LocalDate timestamp, String paymentStatus) {
-        this.transcationId = transcationId;
+    public TransactionDetail
+            (String customerId, String accountId, String creditAmount,
+             String debitAmount, String email, String address,
+             String phone, LocalDate timestamp, String paymentStatus) {
         this.customerId = customerId;
-        this.password = password;
+        this.accountId = accountId;
         this.creditAmount = creditAmount;
         this.debitAmount = debitAmount;
         this.email = email;
         Address = address;
         this.phone = phone;
-        this.payemntMode = payemntMode;
         this.timestamp = timestamp;
         this.paymentStatus = paymentStatus;
     }
@@ -63,13 +61,7 @@ public class TransactionDetail {
         this.customerId = customerId;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getCreditAmount() {
         return creditAmount;
@@ -111,13 +103,6 @@ public class TransactionDetail {
         this.phone = phone;
     }
 
-    public String getPayemntMode() {
-        return payemntMode;
-    }
-
-    public void setPayemntMode(String payemntMode) {
-        this.payemntMode = payemntMode;
-    }
 
     public LocalDate getTimestamp() {
         return timestamp;
@@ -141,13 +126,12 @@ public class TransactionDetail {
         return "TransactionDetail{" +
                 "transcationId=" + transcationId +
                 ", customerId='" + customerId + '\'' +
-                ", password='" + password + '\'' +
+                ", accountId='" + accountId + '\'' +
                 ", creditAmount='" + creditAmount + '\'' +
                 ", debitAmount='" + debitAmount + '\'' +
                 ", email='" + email + '\'' +
                 ", Address='" + Address + '\'' +
                 ", phone='" + phone + '\'' +
-                ", payemntMode='" + payemntMode + '\'' +
                 ", timestamp=" + timestamp +
                 ", paymentStatus='" + paymentStatus + '\'' +
                 '}';

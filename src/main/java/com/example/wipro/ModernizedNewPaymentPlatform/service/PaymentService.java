@@ -18,6 +18,7 @@ public class PaymentService {
 
     @Autowired
     private PaymentRepository paymentRepository;
+    String status="Success";
 
     @Transactional(rollbackFor = Exception.class)
     public PaymentResponse startPayment(PaymentRequest request){
@@ -27,14 +28,20 @@ public class PaymentService {
         //check balance is available or not.
         checkBalance(request);
 
-        paymentRepository.updateFromAccount(request.getBalance(), request.getFromAccountId());
-        paymentRepository.updateToAccount(request.getBalance(),  request.getToAccountId());
 
-        //after sucessful transcation store txn in to txn table.
+        try {
+            paymentRepository.updateFromAccount(request.getBalance(), request.getFromAccountId());
+            paymentRepository.updateToAccount(request.getBalance(), request.getToAccountId());
+        }
+        catch(Exception e){
+            status="Failed";
+            e.getStackTrace();
+        }
+
+        //after sucessful transcation store txn in to txn table
 
 
-
-        return mappedResponse(request);
+        return mappedResponse(request,status);
 
 
 
@@ -62,7 +69,10 @@ public class PaymentService {
 
     }
 
-    private PaymentResponse
+    private PaymentResponse mappedResponse(PaymentRequest request, String status){
+        PaymentResponse response=new PaymentResponse();
+
+    }
 
 
 }
