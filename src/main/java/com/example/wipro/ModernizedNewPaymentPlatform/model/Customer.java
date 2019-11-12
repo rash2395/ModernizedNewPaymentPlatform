@@ -1,18 +1,34 @@
 package com.example.wipro.ModernizedNewPaymentPlatform.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "CUSTOMER")
 public class Customer {
-    private int accountId;
+
+    @Column(name = "ACCOUNT_ID")
+    private String accountId;
+    @Id
+    @Column(name = "ACCOUNT_ID")
     private String customerId;
+    @Column(name = "PASSWORD")
     private String password;
-    private String balanceAmount;
+    @Column(name = "BALANCE_AMOUNT")
+    private double balanceAmount;
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "ADDRESS")
     private String Address;
+    @Column(name = "PHONE")
     private String phone;
 
     public Customer() {
     }
 
-    public Customer(int accountId, String customerId, String password, String balanceAmount, String email, String address, String phone) {
+    public Customer(String accountId, String customerId, String password, double balanceAmount, String email, String address, String phone) {
         this.accountId = accountId;
         this.customerId = customerId;
         this.password = password;
@@ -22,11 +38,11 @@ public class Customer {
         this.phone = phone;
     }
 
-    public int getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
@@ -46,11 +62,11 @@ public class Customer {
         this.password = password;
     }
 
-    public String getBalanceAmount() {
+    public double getBalanceAmount() {
         return balanceAmount;
     }
 
-    public void setBalanceAmount(String balanceAmount) {
+    public void setBalanceAmount(double balanceAmount) {
         this.balanceAmount = balanceAmount;
     }
 
