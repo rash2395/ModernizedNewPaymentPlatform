@@ -9,10 +9,11 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMER")
 public class Customer {
 
-    @Column(name = "ACCOUNT_ID")
-    private String accountId;
     @Id
     @Column(name = "ACCOUNT_ID")
+    private String accountId;
+
+    @Column(name = "CUSTOMER_ID")
     private String customerId;
     @Column(name = "PASSWORD")
     private String password;

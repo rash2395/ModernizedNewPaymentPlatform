@@ -6,17 +6,17 @@ public class PaymentResponse {
     private String fromAccountId;
     private String toAccountId;
     private double amount;
-    private String paymentStatus;
+
 
     public PaymentResponse() {
     }
 
-    public PaymentResponse(String paymentId, String fromAccountId, String toAccountId, double amount, String paymentStatus) {
+    public PaymentResponse(String paymentId, String fromAccountId, String toAccountId, double amount) {
         this.paymentId = paymentId;
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
-        this.paymentStatus = paymentStatus;
+
     }
 
     public String getPaymentId() {
@@ -51,13 +51,7 @@ public class PaymentResponse {
         this.amount = amount;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 
     @Override
     public String toString() {
@@ -66,7 +60,6 @@ public class PaymentResponse {
                 ", fromAccountId='" + fromAccountId + '\'' +
                 ", toAccountId='" + toAccountId + '\'' +
                 ", amount=" + amount +
-                ", paymentStatus='" + paymentStatus + '\'' +
                 '}';
     }
 }

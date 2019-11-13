@@ -7,14 +7,17 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PaymentRepository extends CrudRepository<String, Customer> {
 
-    public Iterable<Customer> findAll();
+
 
     Customer findByAccountId(String accountId);
+
+    Iterable<Customer> findByCustomerId(String customerId);
 
     @Query(value = "select PASSWORD from CUSTOMER Where CUSTOMER_ID=?1" , nativeQuery = true)
     public String getPassword(String customerId);

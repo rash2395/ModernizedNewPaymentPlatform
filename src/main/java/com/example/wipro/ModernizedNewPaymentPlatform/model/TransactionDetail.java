@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "TRANSACTION_DETAIL_TDS")
@@ -18,31 +19,25 @@ public class TransactionDetail {
 
     private String customerId;
     private String accountId;
-    private String creditAmount;
-    private String debitAmount;
+    private double debitedAmount;
     private String email;
     private String Address;
     private String phone;
+    private Date timestamp;
 
-    private LocalDate timestamp;
-    private String paymentStatus;
 
     public TransactionDetail() {
     }
 
-    public TransactionDetail
-            (String customerId, String accountId, String creditAmount,
-             String debitAmount, String email, String address,
-             String phone, LocalDate timestamp, String paymentStatus) {
+    public TransactionDetail(String customerId, String accountId, double debitedAmount,
+                             String email, String address, String phone, Date timestamp) {
         this.customerId = customerId;
         this.accountId = accountId;
-        this.creditAmount = creditAmount;
-        this.debitAmount = debitAmount;
+        this.debitedAmount = debitedAmount;
         this.email = email;
         Address = address;
         this.phone = phone;
         this.timestamp = timestamp;
-        this.paymentStatus = paymentStatus;
     }
 
     public int getTranscationId() {
@@ -62,22 +57,6 @@ public class TransactionDetail {
     }
 
 
-
-    public String getCreditAmount() {
-        return creditAmount;
-    }
-
-    public void setCreditAmount(String creditAmount) {
-        this.creditAmount = creditAmount;
-    }
-
-    public String getDebitAmount() {
-        return debitAmount;
-    }
-
-    public void setDebitAmount(String debitAmount) {
-        this.debitAmount = debitAmount;
-    }
 
     public String getEmail() {
         return email;
@@ -104,22 +83,30 @@ public class TransactionDetail {
     }
 
 
-    public LocalDate getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDate timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
+
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
+    public double getDebitedAmount() {
+        return debitedAmount;
+    }
+
+    public void setDebitedAmount(double debitedAmount) {
+        this.debitedAmount = debitedAmount;
+    }
 
     @Override
     public String toString() {
@@ -127,13 +114,11 @@ public class TransactionDetail {
                 "transcationId=" + transcationId +
                 ", customerId='" + customerId + '\'' +
                 ", accountId='" + accountId + '\'' +
-                ", creditAmount='" + creditAmount + '\'' +
-                ", debitAmount='" + debitAmount + '\'' +
+                ", debitedAmount='" + debitedAmount + '\'' +
                 ", email='" + email + '\'' +
                 ", Address='" + Address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", timestamp=" + timestamp +
-                ", paymentStatus='" + paymentStatus + '\'' +
                 '}';
     }
 }

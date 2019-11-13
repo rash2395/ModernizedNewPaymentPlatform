@@ -20,4 +20,31 @@ public class ResponseEntityExceptionHandler {
 
         return new ResponseEntity<ExceptionResponse>(response,HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleAccountNotException(Exception ex){
+
+        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(), "account not exist");
+
+        return new ResponseEntity<ExceptionResponse>(response,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BalanceNotSufficientException.class)
+    public ResponseEntity<ExceptionResponse> handlebalanceinsufficientException(Exception ex){
+
+        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(),
+                "Balance is not suffcient to intiate payment");
+
+        return new ResponseEntity<ExceptionResponse>(response,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleException(Exception ex){
+
+        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(),
+                "Internal Server Error");
+
+        return new ResponseEntity<ExceptionResponse>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

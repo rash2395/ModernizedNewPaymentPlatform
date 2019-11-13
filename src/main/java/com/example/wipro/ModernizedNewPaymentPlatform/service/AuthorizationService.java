@@ -15,9 +15,9 @@ public class AuthorizationService {
     private PaymentRepository repository;
 
 
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers(String customerId){
 
-        Iterable<Customer> iterable= repository.findAll();
+        Iterable<Customer> iterable= repository.findByCustomerId(customerId);
         List<Customer> customers =new ArrayList<Customer>();
         for(Customer account: iterable)
         {

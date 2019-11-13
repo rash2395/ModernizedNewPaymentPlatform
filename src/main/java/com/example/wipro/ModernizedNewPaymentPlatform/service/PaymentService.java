@@ -5,20 +5,25 @@ import com.example.wipro.ModernizedNewPaymentPlatform.Exception.BalanceNotSuffic
 import com.example.wipro.ModernizedNewPaymentPlatform.model.Customer;
 import com.example.wipro.ModernizedNewPaymentPlatform.model.PaymentRequest;
 import com.example.wipro.ModernizedNewPaymentPlatform.model.PaymentResponse;
+import com.example.wipro.ModernizedNewPaymentPlatform.model.TransactionDetail;
 import com.example.wipro.ModernizedNewPaymentPlatform.repository.PaymentRepository;
+import com.example.wipro.ModernizedNewPaymentPlatform.repository.TransactionRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.TransactionScoped;
+
+import java.util.Date;
 
 @Service
 public class PaymentService {
 
     @Autowired
     private PaymentRepository paymentRepository;
-    String status="Success";
+
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     @Transactional(rollbackFor = Exception.class)
     public PaymentResponse startPayment(PaymentRequest request){
@@ -28,20 +33,15 @@ public class PaymentService {
         //check balance is available or not.
         checkBalance(request);
 
-
-        try {
-            paymentRepository.updateFromAccount(request.getBalance(), request.getFromAccountId());
-            paymentRepository.updateToAccount(request.getBalance(), request.getToAccountId());
-        }
-        catch(Exception e){
-            status="Failed";
-            e.getStackTrace();
-        }
-
-        //after sucessful transcation store txn in to txn table
+        paymentRepository.updateFromAccount(request.getBalance(), request.getFromAccountId());
+        paymentRepository.updateToAccount(request.getBalance(), request.getToAccountId());
 
 
-        return mappedResponse(request,status);
+        //store transaction in to tx table
+        int paymentId=storeTransction(request);
+
+
+        return mappedResponse(request,paymentId);
 
 
 
@@ -69,8 +69,23 @@ public class PaymentService {
 
     }
 
-    private PaymentResponse mappedResponse(PaymentRequest request, String status){
-        PaymentResponse response=new PaymentResponse();
+
+    private int storeTransction(PaymentRequest request){
+        Customer customer=paymentRepository.findByAccountId(request.getFromAccountId());
+        TransactionDetail txDetail = new TransactionDetail(
+                customer.getCustomerId(),customer.getAccountId(),customer.getBalanceAmount()
+                ,customer.getEmail(),customer.getAddress(),customer.getPhone(),new Date());
+
+        TransactionDetail detail=transactionRepository.save(txDetail);
+
+        return detail.getTranscationId();
+
+    }
+
+    private PaymentResponse mappedResponse(PaymentRequest request, int paymentId){
+        PaymentResponse response=new PaymentResponse(String.valueOf(paymentId),
+                request.getFromAccountId(),request.getToAccountId(),request.getBalance());
+        return response;
 
     }
 
