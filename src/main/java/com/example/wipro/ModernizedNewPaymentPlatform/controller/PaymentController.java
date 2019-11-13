@@ -28,7 +28,7 @@ public class PaymentController {
     @Autowired
     private TransactionService transactionService;
 
-    @RequestMapping(value = "/payment", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/payment", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<PaymentResponse> doPayment(@RequestBody PaymentRequest request,
                                                     @RequestHeader("CustoemrID") String customerId,
                                                     @RequestHeader("Password") String password ){

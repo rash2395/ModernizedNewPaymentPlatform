@@ -1,10 +1,11 @@
 package com.example.wipro.ModernizedNewPaymentPlatform.model;
 
 
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,8 +14,8 @@ import java.util.Date;
 @Table(name = "TRANSACTION_DETAIL_TDS")
 public class TransactionDetail {
 
-    @Id
     @GeneratedValue
+    @Id
     private int transcationId;
 
     private String customerId;

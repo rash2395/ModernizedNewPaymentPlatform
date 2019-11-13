@@ -50,7 +50,7 @@ public class PaymentService {
     private void validateFromAndToAccount(PaymentRequest request){
         Customer customer=null;
         customer= paymentRepository.findByAccountId(request.getFromAccountId());
-        if(!StringUtils.equals(customer.getAccountId(),request.getFromAccountId())){
+        if(customer==null){
             throw new AccountNotFoundException("From account Not Found");
         }
 
@@ -63,7 +63,7 @@ public class PaymentService {
 
     private void checkBalance(PaymentRequest request){
        Customer customer= paymentRepository.findByAccountId(request.getFromAccountId());
-       if(customer.getBalanceAmount()>request.getBalance()==false){
+       if(customer.getBalanceAmount()<request.getBalance()==true){
            throw new BalanceNotSufficientException("Balance is not sufficent to intiate transaction.");
        }
 
@@ -73,7 +73,7 @@ public class PaymentService {
     private int storeTransction(PaymentRequest request){
         Customer customer=paymentRepository.findByAccountId(request.getFromAccountId());
         TransactionDetail txDetail = new TransactionDetail(
-                customer.getCustomerId(),customer.getAccountId(),customer.getBalanceAmount()
+                customer.getCustomerId(),customer.getAccountId(),request.getBalance()
                 ,customer.getEmail(),customer.getAddress(),customer.getPhone(),new Date());
 
         TransactionDetail detail=transactionRepository.save(txDetail);
