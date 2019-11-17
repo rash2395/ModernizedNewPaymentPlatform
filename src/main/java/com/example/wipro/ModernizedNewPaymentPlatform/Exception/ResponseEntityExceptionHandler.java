@@ -16,7 +16,7 @@ public class ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthorizationException.class)
     public ResponseEntity<ExceptionResponse> handleAuthException(Exception ex){
 
-        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(), "CustomerId or Password is not correct");
+        ExceptionResponse response=new ExceptionResponse(new Date(), "Unathorized Exception", ex.getMessage());
 
         return new ResponseEntity<ExceptionResponse>(response,HttpStatus.UNAUTHORIZED);
     }
@@ -24,7 +24,7 @@ public class ResponseEntityExceptionHandler {
     @ExceptionHandler(AccountNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleAccountNotException(Exception ex){
 
-        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(), "account not exist");
+        ExceptionResponse response=new ExceptionResponse(new Date(), "Not_Found Exception", ex.getMessage());
 
         return new ResponseEntity<ExceptionResponse>(response,HttpStatus.NOT_FOUND);
     }
@@ -32,8 +32,8 @@ public class ResponseEntityExceptionHandler {
     @ExceptionHandler(BalanceNotSufficientException.class)
     public ResponseEntity<ExceptionResponse> handlebalanceinsufficientException(Exception ex){
 
-        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(),
-                "Balance is not suffcient to intiate payment");
+        ExceptionResponse response=new ExceptionResponse(new Date(),
+                "BadRequest Exception", ex.getMessage());
 
         return new ResponseEntity<ExceptionResponse>(response,HttpStatus.BAD_REQUEST);
     }
@@ -41,8 +41,8 @@ public class ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponse> handleException(Exception ex){
 
-        ExceptionResponse response=new ExceptionResponse(new Date(), ex.getMessage(),
-                "Internal Server Error");
+        ExceptionResponse response=new ExceptionResponse(new Date(),
+                "Internal Server Error",ex.getMessage());
 
         return new ResponseEntity<ExceptionResponse>(response,HttpStatus.INTERNAL_SERVER_ERROR);
     }
