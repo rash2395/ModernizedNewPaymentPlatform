@@ -25,9 +25,9 @@ stages{
 	   stage('push image to docker hub'){
             
             steps {
-                sh 'docker login   -u sk6785 -p Sandeep@123'
-				sh 'docker tag payment sk6785/payment:1.0'
-				sh 'docker push  sk6785/payment:1.0'
+                bat 'docker login   -u sk6785 -p Sandeep@123'
+				bat 'docker tag payment sk6785/payment:1.0'
+				bat 'docker push  sk6785/payment:1.0'
 				
             }
         }
